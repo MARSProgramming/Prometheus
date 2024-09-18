@@ -102,6 +102,19 @@ public class SwerveSubsystem extends SubsystemBase
     swerveDrive = new SwerveDrive(driveCfg, controllerCfg, Constants.MAX_SPEED);
   }
 
+
+  /*EXPERIMENTAL
+   * Zero the swerves
+   */
+    public Command zeroSwerveCommand() {
+    return runOnce(() ->{
+      swervelib.SwerveModule[] swerveModules = swerveDrive.getModules();
+      swerveModules[0].setAngle(0);
+      swerveModules[1].setAngle(0);
+      swerveModules[2].setAngle(0);
+      swerveModules[3].setAngle(0);
+    });
+  }
   /**
    * Setup AutoBuilder for PathPlanner.
    */

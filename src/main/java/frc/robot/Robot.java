@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -28,6 +30,8 @@ public class Robot extends TimedRobot
 
   private Timer disabledTimer;
 
+  AddressableLED m_led = new AddressableLED(0);
+
   public Robot()
   {
     instance = this;
@@ -51,6 +55,16 @@ public class Robot extends TimedRobot
     // Create a timer to disable motor brake a few seconds after disable.  This will let the robot stop
     // immediately when disabled, but then also let it be pushed more 
     disabledTimer = new Timer();
+
+    AddressableLEDBuffer m_ledbuffer = new AddressableLEDBuffer(20);
+    m_led.setLength(m_ledbuffer.getLength());
+
+    for (int i = 0; i < m_ledbuffer.getLength(); i++){
+      m_ledbuffer.setRGB(i, 255, 0, 0);
+    }
+
+    m_led.setData(m_ledbuffer);
+    m_led.start(); 
   }
 
   /**
